@@ -38,6 +38,7 @@ def generateSubtractionQuestion(minSubtractedTerm: int, maxSubtractedTerm: int):
 
     return outputFormatRandomizer('-', firstTerm, secondTerm, totalValue)
 
+# Adds the title, name line, and creator text at the bottom.
 def addInfoText(worksheet: canvas.Canvas, title: str):
     worksheet.setFillColor(colors.black)
 
