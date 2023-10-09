@@ -13,15 +13,33 @@ def generateAdditionQuestion(minTotalValue: int, maxTotalValue: int):
     firstValue = totalValue - random.randint(1, totalValue-1)
     secondValue = totalValue - firstValue
 
-    return str(firstValue) + " + " + str(secondValue) + " = __"
+    output = ""
+    equalsPlacement = random.randint(0, 1)
+
+    if equalsPlacement == 0:
+        output = str(firstValue) + " + " + str(secondValue) + " = __"
+    else:
+        output = str(totalValue) + " = " + str(firstValue) + " + __"
+
+    return output
 
 # Generate a two value positive intiger subtraction question
 # Largest value subtracted
 def generateSubtractionQuestion(minSubtractedTerm: int, maxSubtractedTerm: int):
     firstTerm = random.randint(minSubtractedTerm, maxSubtractedTerm)
     secondTerm = random.randint(1, firstTerm)
+    totalValue = firstTerm - secondTerm
 
-    return str(firstTerm) + " - " + str(secondTerm) + " = __"
+    output = ""
+    equalsPlacement = random.randint(0, 1)
+
+    if equalsPlacement == 0:
+        output = str(firstTerm) + " - " + str(secondTerm) + " = __"
+    else:
+        output = str(totalValue) + " = " + str(firstTerm) + " - __"
+
+
+    return output
 
 def generateQuestionSheet():
     c = canvas.Canvas("MattePump.pdf", pagesize=A4)
