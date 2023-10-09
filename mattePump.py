@@ -45,10 +45,16 @@ def generateQuestionSheet():
     c = canvas.Canvas("MattePump.pdf", pagesize=A4)
     c.setFillColor(colors.black)
     c.setFont("Helvetica", 24)
-    for ix in range(0, 14):
+    for ix in range(0, 12):
         c.drawString(70, ix*50+100, generateAdditionQuestion(2, 10))
-    for ix in range(0, 14):
+    for ix in range(0, 12):
         c.drawString(350, ix*50+100, generateSubtractionQuestion(2, 10))
+
+    c.setFont("Helvetica", 30)
+    c.drawString(70, 770, "Addition & Subtraktion")
+
+    c.setFont("Helvetica", 15)
+    c.drawString(70, 720, "Namn: __________________")
 
     c.setFont("Helvetica", 10)
     c.drawString(70, 70, "Genererad av MattePump 1.0" + "     " + str(date.today()))
