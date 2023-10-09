@@ -4,6 +4,20 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from datetime import date
 
+# returns a string of "x _ y _ z" where _ is operand 1 and 2 respectively
+def formatQuestion(operand1: chr, operand2: chr, x: str, y: str, z: str):
+    return x + " " + operand1 + " " + y + " " + operand2 + " " + z
+
+# randomizes between z = x ? __, and x ? y = __, where ? == operand
+def outputFormatRandomizer(operand: chr,
+                           firstValue: int,
+                           secondValue: int,
+                           totalValue: int):
+    if random.randint(0, 1) == 0:
+        return formatQuestion(operand, '=', str(firstValue), str(secondValue), "__")
+    else:
+        return formatQuestion('=', operand, str(totalValue), str(firstValue), "__")
+
 # Generate a two value positive intiger addition question
 # Largest sum
 def generateAdditionQuestion(minTotalValue: int, maxTotalValue: int):
@@ -13,15 +27,7 @@ def generateAdditionQuestion(minTotalValue: int, maxTotalValue: int):
     firstValue = totalValue - random.randint(1, totalValue-1)
     secondValue = totalValue - firstValue
 
-    output = ""
-    equalsPlacement = random.randint(0, 1)
-
-    if equalsPlacement == 0:
-        output = str(firstValue) + " + " + str(secondValue) + " = __"
-    else:
-        output = str(totalValue) + " = " + str(firstValue) + " + __"
-
-    return output
+    return outputFormatRandomizer('+', firstValue, secondValue, totalValue)
 
 # Generate a two value positive intiger subtraction question
 # Largest value subtracted
@@ -30,16 +36,7 @@ def generateSubtractionQuestion(minSubtractedTerm: int, maxSubtractedTerm: int):
     secondTerm = random.randint(1, firstTerm)
     totalValue = firstTerm - secondTerm
 
-    output = ""
-    equalsPlacement = random.randint(0, 1)
-
-    if equalsPlacement == 0:
-        output = str(firstTerm) + " - " + str(secondTerm) + " = __"
-    else:
-        output = str(totalValue) + " = " + str(firstTerm) + " - __"
-
-
-    return output
+    return outputFormatRandomizer('-', firstTerm, secondTerm, totalValue)
 
 def addInfoText(worksheet: canvas.Canvas, title: str):
     worksheet.setFillColor(colors.black)
