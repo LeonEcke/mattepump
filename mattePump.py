@@ -41,25 +41,34 @@ def generateSubtractionQuestion(minSubtractedTerm: int, maxSubtractedTerm: int):
 
     return output
 
+def addInfoText(worksheet: canvas.Canvas, title: str):
+    worksheet.setFillColor(colors.black)
+
+    worksheet.setFont("Helvetica", 30)
+    worksheet.drawString(70, 770, title)
+
+    worksheet.setFont("Helvetica", 15)
+    worksheet.drawString(70, 720, "Namn: ________________________________")
+
+    worksheet.setFont("Helvetica", 10)
+    worksheet.drawString(70, 70, "Genererad av MattePump 1.0")
+    worksheet.drawString(70, 55, str(date.today()))
+
+def addQuestions(worksheet: canvas.Canvas):
+    worksheet.setFillColor(colors.black)
+    worksheet.setFont("Helvetica", 24)
+    for ix in range(0, 12):
+        worksheet.drawString(70, ix*50+120, generateAdditionQuestion(2, 10))
+    for ix in range(0, 12):
+        worksheet.drawString(350, ix*50+120, generateSubtractionQuestion(2, 10))
+
 def generateQuestionSheet():
-    c = canvas.Canvas("MattePump.pdf", pagesize=A4)
-    c.setFillColor(colors.black)
-    c.setFont("Helvetica", 24)
-    for ix in range(0, 12):
-        c.drawString(70, ix*50+100, generateAdditionQuestion(2, 10))
-    for ix in range(0, 12):
-        c.drawString(350, ix*50+100, generateSubtractionQuestion(2, 10))
+    worksheet = canvas.Canvas("MattePump.pdf", pagesize=A4)
 
-    c.setFont("Helvetica", 30)
-    c.drawString(70, 770, "Addition & Subtraktion")
+    addInfoText(worksheet, "Addition och Subtraktion")
+    addQuestions(worksheet)
 
-    c.setFont("Helvetica", 15)
-    c.drawString(70, 720, "Namn: __________________")
-
-    c.setFont("Helvetica", 10)
-    c.drawString(70, 70, "Genererad av MattePump 1.0" + "     " + str(date.today()))
-
-    c.save()
+    worksheet.save()
 
 generateQuestionSheet()
 #print (generateSubtractionQuestion(2, 10))
