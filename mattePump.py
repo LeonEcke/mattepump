@@ -4,9 +4,22 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from datetime import date
 
-# returns a string of "x _ y _ z" where _ is operand 1 and 2 respectively
-def formatQuestion(operand1: chr, operand2: chr, x: str, y: str, z: str):
-    return x + " " + operand1 + " " + y + " " + operand2 + " " + z
+def combineSymbols(operands: [chr], values: [str]):
+    if len(values) != len(operands) + 1:
+        raise ArithmeticError("Operand to value amount missmatch.")
+        # There needs to be exactly one fewer operands than values
+    output: str = ""
+
+    operands.reverse()
+    values.reverse()
+
+    # Im sure this can be done better. 
+    for ix in range(0, len(operands)):
+        output += values.pop() + " "
+        output += operands.pop() + " "
+    output += values.pop()
+
+    return output
 
 # randomizes between z = x ? __, and x ? y = __, where ? == operand
 def outputFormatRandomizer(operand: chr,
@@ -14,9 +27,9 @@ def outputFormatRandomizer(operand: chr,
                            secondValue: int,
                            totalValue: int):
     if random.randint(0, 1) == 0:
-        return formatQuestion(operand, '=', str(firstValue), str(secondValue), "__")
+        return combineSymbols([operand, '='], [str(firstValue), str(secondValue), "__"])
     else:
-        return formatQuestion('=', operand, str(totalValue), str(firstValue), "__")
+        return combineSymbols(['=', operand], [str(totalValue), str(secondValue), "__"])
 
 # Generate a two value positive intiger addition question
 # Largest sum
