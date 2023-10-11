@@ -1,3 +1,6 @@
+"All source code within this document is covered by"
+"a CC BY-NC-SA 4.0 licence. Read more in /README.md"
+
 import random
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
@@ -63,7 +66,8 @@ def addInfoText(worksheet: canvas.Canvas, title: str):
 
     worksheet.setFont("Courier", 10)
     worksheet.drawString(70, 70, "Genererad av MattePump 1.0")
-    worksheet.drawString(70, 55, str(date.today()))
+    worksheet.drawString(70, 55, "Generarad " + str(date.today()))
+    worksheet.drawString(70, 40, "CC BY-NC-SA 4.0")
 
 def addQuestions(worksheet: canvas.Canvas):
     worksheet.setFillColor(colors.black)
