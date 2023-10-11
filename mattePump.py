@@ -48,19 +48,21 @@ def addInfoText(worksheet: canvas.Canvas, title: str):
                          verticalMargin + ( infotextSize + infotextMargin ) * 0,
                          "CC BY-NC-SA 4.0")
 
-def addQuestions(worksheet: canvas.Canvas):
+def addQuestions(worksheet: canvas.Canvas,
+                 operands: [chr],
+                 valueRange: (int, int)):
     worksheet.setFillColor(colors.black)
     worksheet.setFont("Courier", 24)
     for ix in range(0, 12):
-        worksheet.drawString(70, ix*50+120, generateQuestion((2, 10), ['+', '-']))
+        worksheet.drawString(70, ix*50+120, generateQuestion(valueRange, operands))
     for ix in range(0, 12):
-        worksheet.drawString(350, ix*50+120, generateQuestion((2, 50), ['+', '-']))
+        worksheet.drawString(350, ix*50+120, generateQuestion(valueRange, operands))
 
 def generateQuestionSheet():
     worksheet = canvas.Canvas("MattePump.pdf", pagesize=A4)
 
     addInfoText(worksheet, "Addition och Subtraktion")
-    addQuestions(worksheet)
+    addQuestions(worksheet, ['+', '-'], (2, 15))
 
     worksheet.save()
 
