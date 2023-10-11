@@ -50,10 +50,7 @@ def generateSubtractionQuestion(minSubtractedTerm: int, maxSubtractedTerm: int):
 
     return outputFormatRandomizer('-', firstTerm, secondTerm, totalValue)
 
-def generateQuestion(controllingRange: (int, int),
-                     operands: [chr]):
-    operandList = []
-    valueList = []
+def generateQuestion(controllingRange: (int, int), operands: [chr]):
     match random.choice(operands):
         case '+':
             return generateAdditionQuestion(controllingRange[0], controllingRange[1])
