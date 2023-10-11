@@ -10,18 +10,43 @@ from questionGeneration import generateQuestion
 
 # Adds the title, name line, and creator text at the bottom.
 def addInfoText(worksheet: canvas.Canvas, title: str):
+
+    # Massive blob of formatting
+    horizontalMargin = 70
+    verticalMargin = 40
+    titleSize = 30
+    nameAreaSize = 15
+    nameAreaMargin = nameAreaSize*2
+    infotextSize = 10
+    infotextMargin = 3
+
     worksheet.setFillColor(colors.black)
 
-    worksheet.setFont("Courier", 30)
-    worksheet.drawString(70, 770, title)
+    titleVerticalPlacement = A4[1] - verticalMargin - titleSize
+    worksheet.setFont("Courier", titleSize)
+    worksheet.drawString(horizontalMargin,
+                         titleVerticalPlacement,
+                         title)
 
-    worksheet.setFont("Courier", 15)
-    worksheet.drawString(70, 720, "Namn: ________________________________")
+    nameAreaPlacement = titleVerticalPlacement - nameAreaSize - nameAreaMargin
+    worksheet.setFont("Courier", nameAreaSize)
+    worksheet.drawString(horizontalMargin,
+                         nameAreaPlacement,
+                         "Namn: ________________________________")
 
-    worksheet.setFont("Courier", 10)
-    worksheet.drawString(70, 70, "Genererad av MattePump 1.0")
-    worksheet.drawString(70, 55, "Generarad " + str(date.today()))
-    worksheet.drawString(70, 40, "CC BY-NC-SA 4.0")
+    worksheet.setFont("Courier", infotextSize)
+
+    worksheet.drawString(horizontalMargin,
+                         verticalMargin + ( infotextSize + infotextMargin ) * 2,
+                         "Genererad av MattePump 1.0")
+    
+    worksheet.drawString(horizontalMargin,
+                         verticalMargin + ( infotextSize + infotextMargin ) * 1,
+                         "Generarad " + str(date.today()))
+    
+    worksheet.drawString(horizontalMargin,
+                         verticalMargin + ( infotextSize + infotextMargin ) * 0,
+                         "CC BY-NC-SA 4.0")
 
 def addQuestions(worksheet: canvas.Canvas):
     worksheet.setFillColor(colors.black)
