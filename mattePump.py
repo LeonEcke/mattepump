@@ -54,6 +54,18 @@ def generateSubtractionQuestion(minSubtractedTerm: int, maxSubtractedTerm: int):
 
     return outputFormatRandomizer('-', firstTerm, secondTerm, totalValue)
 
+def generateQuestion(controllingRange: (int, int),
+                     operands: [chr]):
+    operandList = []
+    valueList = []
+    match random.choice(operands):
+        case '+':
+            return generateAdditionQuestion(controllingRange[0], controllingRange[1])
+        case '-':
+            return generateSubtractionQuestion(controllingRange[0], controllingRange[1])
+        case _:
+            return "Error, invalid operand"
+
 # Adds the title, name line, and creator text at the bottom.
 def addInfoText(worksheet: canvas.Canvas, title: str):
     worksheet.setFillColor(colors.black)
@@ -73,9 +85,9 @@ def addQuestions(worksheet: canvas.Canvas):
     worksheet.setFillColor(colors.black)
     worksheet.setFont("Courier", 24)
     for ix in range(0, 12):
-        worksheet.drawString(70, ix*50+120, generateAdditionQuestion(2, 10))
+        worksheet.drawString(70, ix*50+120, generateQuestion((2, 10), ['+', '-']))
     for ix in range(0, 12):
-        worksheet.drawString(350, ix*50+120, generateSubtractionQuestion(2, 10))
+        worksheet.drawString(350, ix*50+120, generateQuestion((2, 50), ['+', '-']))
 
 def generateQuestionSheet():
     worksheet = canvas.Canvas("MattePump.pdf", pagesize=A4)
