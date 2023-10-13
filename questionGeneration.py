@@ -28,7 +28,7 @@ def outputFormatRandomizer(operand: chr,
     if random.randint(0, 1) == 0:
         return combineSymbols([operand, '='], [str(firstValue), str(secondValue), "__"])
     else:
-        return combineSymbols(['=', operand], [str(totalValue), str(secondValue), "__"])
+        return combineSymbols(['=', operand], [str(totalValue), str(firstValue), "__"])
 
 # Generate a two value positive intiger addition question
 # Largest sum
